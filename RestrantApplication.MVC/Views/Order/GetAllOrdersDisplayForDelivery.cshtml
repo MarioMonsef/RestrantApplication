@@ -1,0 +1,69 @@
+﻿@using RestrantApplication.Core.ViewModels.Order
+@model IReadOnlyList<OrderViewModel>
+@{
+    ViewData["Title"] = "GetAllOrdersDisplayForDelevary";
+}
+
+<div class="container">
+    <main role="main" class="pb-3">
+        <br /><br />
+        <h1>Display For Delevary</h1>
+        <br />
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger">
+                @TempData["ErrorMessage"]
+            </div>
+        }
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success">
+                @TempData["SuccessMessage"]
+            </div>
+        }
+        @if (Model.Any())
+        {
+            <table class="table table-hover table-bordered text-center">
+                <thead>
+                    <tr>
+
+                        <th>Order Date</th>
+                        <th>Order Address</th>
+                        <th>Order State</th>
+                        <th>Order Type</th>
+                        <th>Prise of Order</th>
+                        <th>DeliveryNow Order</th>
+                        <th>DelivaryDone Order</th>
+                        <th>Details Of Order</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.OrderDate</td>
+                            <td>@item.ApplictionUser.Address</td>
+                            <td>@item.orderState</td>
+                            <td>@item.orderType</td>
+                            <td>@item.TotalAmount</td>
+                            <td><a asp-route-OrderID="@item.ID" asp-route-orderState="@RestrantApplication.Core.Models.Order.OrderState.DeliveryNow" asp-action="ChangeOrderState" asp-controller="Order">DeliveryNow Order</a></td>
+                            <td><a asp-route-OrderID="@item.ID" asp-route-orderState="@RestrantApplication.Core.Models.Order.OrderState.DelivaryDone" asp-action="ChangeOrderState" asp-controller="Order">DelivaryDone Order</a></td>
+                            <td><a asp-route-OrderID="@item.ID" asp-controller="Order" asp-action="GetOrderDetails">Details Order</a></td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+            <h6 class="text-Danger"> Hint : Payment upon receipt </h6>
+            <br />
+            <br />
+        }
+        else
+        {
+            <br />
+            <h4>Not Found Any Orders</h4>
+            <br />
+
+        }
+    </main>
+</div>

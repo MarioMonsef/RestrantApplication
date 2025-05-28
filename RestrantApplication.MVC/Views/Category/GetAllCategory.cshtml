@@ -1,0 +1,58 @@
+﻿@model IReadOnlyList<RestrantApplication.Core.Models.Product.Category>
+@{
+    ViewData["Title"] = "GetAllCategory";
+}
+
+<div class="container">
+    <main role="main" class="pb-3">
+        <br /><br />
+        <h1>GetAllCategory</h1>
+
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger">
+                @TempData["ErrorMessage"]
+            </div>
+        }
+        @if (Model.Any())
+        {
+
+            <table class="table table-hover table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th>Review Date</th>
+                        <th>Comment</th>
+                        <th>Update Review</th>
+                        <th>Delete Review</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>@item.Description</td>
+                            <td><a asp-route-categoryId="@item.ID" asp-controller="Category" asp-action="UpdateCategory">Update Category</a></td>
+                            <td><a asp-route-categoryId="@item.ID" asp-controller="Category" asp-action="DeleteCategory">Delete Category</a></td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+            <br />
+            <br />
+        }
+        else
+        {
+            <br />
+            <h4>Not Found Any Categories</h4>
+            <br />
+
+            <br />
+        }
+        <a class="btn btn-primary" asp-action="AddCategory" asp-controller="Category">Add Category</a>
+        <br />
+        <br />
+        
+    </main>
+</div>

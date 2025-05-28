@@ -1,0 +1,42 @@
+﻿@model List<Microsoft.AspNetCore.Identity.IdentityRole>
+@{
+    ViewData["Title"] = "GetAllRoles";
+}
+
+<div class="container">
+    <main role="main" class="pb-3">
+
+
+        <br /><br />
+        <h1>GetAllRoles</h1>
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-danger">
+                @TempData["Error"]
+            </div>
+        }
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert alert-success">
+                @TempData["Success"]
+            </div>
+        }
+<table class="table table-hover table-bordered">
+<tr>
+    <th>Name</th>
+    <th>Update</th>
+    <th>Delete</th>
+</tr>
+
+@foreach (var role in Model)
+{
+<tr>
+    <td>@role.Name</td>
+    <td><a asp-controller="Role" asp-action="UpdateRole" asp-route-ID="@role.Id">Update Role</a></td>
+    <td><a asp-controller="Role" asp-action="DeleteRole" asp-route-ID="@role.Id">Delete Role</a></td>
+</tr>    
+}
+        </table>
+        <a class="btn btn-primary" asp-action="AddRole" >Inesert New Role</a>
+    </main>
+</div>

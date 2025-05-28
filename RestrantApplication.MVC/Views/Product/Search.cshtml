@@ -1,0 +1,144 @@
+﻿@using RestrantApplication.Core.ViewModels.Product
+@model RestrantApplication.MVC.Helper.Pagination<ProductViewModel>
+@{
+    ViewData["Title"] = "Search Results";
+}
+
+<section class="food_section layout_padding">
+    <div class="container">
+        <div class="heading_container heading_center mb-5">
+            <h1>Search Results</h1>
+            <br />
+            <div class="search-box">
+                <form asp-action="Search" method="get" class="input-group">
+                    <input type="text"
+                           name="searchTerm"
+                           class="form-control search-input"
+                           placeholder="Search products..."
+                           value="@Context.Request.Query["searchTerm"]" />
+                    <button type="submit" class="btn btn-search">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+            </div>
+
+        </div>
+
+        <div id="productsContainer">
+            @await Html.PartialAsync("_ProductGridPartial", Model.Data)
+        </div>
+
+        @if (Model.HasNextPage)
+        {
+            <div class="btn-box text-center mt-4">
+                <a href="#" id="loadMore"
+                   data-current-page="@Model.PageNumber"
+                   data-page-size="@Model.PageSize"
+                   data-search-term="@Context.Request.Query["searchTerm"]"
+                   data-total-items="@Model.TotalCount"
+                   class="btn btn-primary">
+                    View More Results
+                </a>
+            </div>
+        }
+    </div>
+</section>
+
+@section Styles {
+    <style>
+        .search-box {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .search-input {
+            border-radius: 25px 0 0 25px;
+            border-right: none;
+            height: 45px;
+            padding: 10px 25px;
+            font-size: 16px;
+        }
+
+        .btn-search {
+            border-radius: 0 25px 25px 0;
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            transition: all 0.3s ease;
+        }
+
+            .btn-search:hover {
+                background: #2980b9;
+                transform: translateY(-2px);
+            }
+
+        .cart-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+            .cart-link:hover {
+                background: #f8f9fa;
+                transform: scale(1.1);
+            }
+
+        .box {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+            .box:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            }
+    </style>
+}
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#loadMore').click(function (e) {
+                e.preventDefault();
+                var button = $(this);
+                var nextPage = parseInt(button.data('current-page')) + 1;
+                var searchTerm = button.data('search-term');
+                var pageSize = parseInt(button.data('page-size'));
+
+                button.html('<i class="fas fa-spinner fa-spin"></i> Loading...');
+
+                $.ajax({
+                    url: '@Url.Action("Search", "Product")',
+                    type: 'GET',
+                    data: {
+                        searchTerm: searchTerm,
+                        pageNumber: nextPage,
+                        pageSize: pageSize
+                    },
+                    headers: {
+                        "X-Requested-With": "XMLHttpRequest"
+                    },
+                    success: function (partialViewHtml) {
+                        $('#productsContainer').append(partialViewHtml);
+
+                        if ((nextPage * pageSize) >= parseInt(button.data('total-items'))) {
+                            button.hide();
+                        }
+                        button.data('current-page', nextPage);
+                    },
+                    error: function () {
+                        alert("Error loading more results.");
+                    },
+                    complete: function () {
+                        button.text('View More Results');
+                    }
+                });
+            });
+        });
+    </script>
+}

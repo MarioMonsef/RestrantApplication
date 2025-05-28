@@ -1,0 +1,53 @@
+﻿@using RestrantApplication.Core.ViewModels.Product
+@model IEnumerable<ProductViewModel>
+
+@foreach (var product in Model)
+{
+    <div class="col-sm-6 col-lg-4 all @product.category.Name.ToLower()">
+        <div class="box">
+            @if (User.IsInRole("Manger"))
+            {
+                    <!-- Edit Button -->
+                    <a asp-controller="Product"
+                       asp-action="UpdateProduct"
+                       asp-route-id="@product.ID"
+                       class="edit-btn"
+                       title="Edit Product">
+                        <i class="fas fa-edit"></i>
+                    </a>
+
+                    <!-- Delete Button -->
+                    <a asp-controller="Product"
+                       asp-action="DeleteProduct"
+                       asp-route-id="@product.ID"
+                       class="delete-btn"
+                       onclick="return confirm('Are you sure you want to delete this item?')"
+                       title="Delete Product">
+                        <span class="delete-icon">×</span>
+                    </a>
+                
+            }
+            <div>
+                <div class="img-box">
+                    <img src="/images/ProductImages/@product.Photo.PhotoName" alt="@product.Name">
+                </div>
+                <div class="detail-box">
+                    <h5>@product.Name</h5>
+                    <p>@product.Description</p>
+                    <div class="options">
+                        <h6>$@product.Prise</h6>
+                        <a asp-action="AddItemToCart"
+                           asp-controller="Cart"
+                           asp-route-ProductID="@product.ID">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 456 456" class="cart-icon">
+                                <path d="M439 85h-323l-5-34c-3-23-22-40-45-40H20C9 11 0 20 0 31s9 20 20 20h42c3 0 5 2 5 5l32 216c4 27 28 48 55 48h213c27 0 50-19 55-45l33-166c2-13-5-24-16-26z" />
+                                <circle cx="346" cy="392" r="53" />
+                                <circle cx="215" cy="390" r="52" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

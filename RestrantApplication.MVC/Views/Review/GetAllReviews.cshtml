@@ -1,0 +1,54 @@
+﻿@using RestrantApplication.Core.ViewModels.Review
+@model IReadOnlyList<ReviewViewModel>
+@{
+    ViewData["Title"] = "GetAllReviews";
+}
+
+<div class="container">
+    <main role="main" class="pb-3">
+        <br /><br />
+        @if (Model.Any())
+        {
+            <h1>Get All Reviews</h1>
+
+            <table class="table table-hover table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th>Review Date</th>
+                        <th>Comment</th>
+                        <th>Update Review</th>
+                        <th>Delete Review</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.ReviewDate</td>
+                            <td align="left">
+                                <p style=" word-wrap: break-word; max-width: 85ch;">
+                                    @item.Comment
+                                </p>
+                            </td>
+                            <td><a asp-route-ReviewID="@item.ID" asp-controller="Review" asp-action="UpdateReview">Update Review</a></td>
+                            <td><a asp-route-ReviewID="@item.ID" asp-controller="Review" asp-action="DeleteReview">Delete Review</a></td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+            <br />
+            <br />
+        }
+        else
+        {
+            <br />
+            <h4>Not Found Any Reviews</h4>
+            <br />
+
+            <br />
+        }
+        <br />
+        <br />
+    </main>
+</div>

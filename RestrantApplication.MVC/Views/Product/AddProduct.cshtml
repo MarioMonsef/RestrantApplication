@@ -1,0 +1,70 @@
+﻿@using RestrantApplication.Core.ViewModels.Product
+@model AddProductAndImageViewModel
+@{
+    ViewData["Title"] = "AddProduct";
+    SelectList selectLists = new SelectList(ViewBag.Categories, "ID", "Name");
+}
+
+<div class="container">
+    <main role="main" class="pb-3">
+        <br />
+        <h1>AddProduct</h1>
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="AddProduct" enctype="multipart/form-data">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <input asp-for="Description" class="form-control" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Prise" class="control-label"></label>
+                        <input asp-for="Prise" class="form-control" />
+                        <span asp-validation-for="Prise" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Stock" class="control-label"></label>
+                        <input asp-for="Stock" class="form-control" />
+                        <span asp-validation-for="Stock" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="categoryID" class="control-label"> </label>
+                        <br />
+                        <select asp-items="selectLists" asp-for="categoryID" class="form-control">
+                            <option>Select Category Please</option>
+                        </select>
+                        <span asp-validation-for="categoryID" class="text-danger"></span>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="form-group">
+                        <label asp-for="Image" class="control-label"></label>
+                        <input asp-for="Image" class="form-control" />
+                        <span asp-validation-for="Image" class="text-danger"></span>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="IsAvilable" /> @Html.DisplayNameFor(model => model.IsAvilable)
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Add Product" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
