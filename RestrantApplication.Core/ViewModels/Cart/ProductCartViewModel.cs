@@ -1,13 +1,4 @@
-﻿using RestrantApplication.Core.Models.Product;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RestrantApplication.Core.ViewModels.Cart
+﻿namespace RestrantApplication.Core.ViewModels.Cart
 {
     public record ProductcartViewModel
     {

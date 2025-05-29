@@ -1,13 +1,4 @@
-﻿using RestrantApplication.Core.Models.Cart;
-using RestrantApplication.Core.Models.Identity;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RestrantApplication.Core.ViewModels.Cart
+﻿namespace RestrantApplication.Core.ViewModels.Cart
 {
     public record CartViewModel
     {
@@ -15,6 +6,6 @@ namespace RestrantApplication.Core.ViewModels.Cart
 
         public string UserID { get; set; }
 
-        public ICollection<CartItemsViewModel> CartItems { get; set; } = new List<CartItemsViewModel>();
+        public virtual ICollection<CartItemsViewModel> CartItems { get; set; } = new List<CartItemsViewModel>();
     }
 }

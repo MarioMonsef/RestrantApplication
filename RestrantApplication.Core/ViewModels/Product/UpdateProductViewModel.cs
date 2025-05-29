@@ -1,17 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
-using RestrantApplication.Core.Models.Product;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Runtime.Serialization;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RestrantApplication.Core.ViewModels.Product
 {
-    public class UpdateProductViewModel
+    public record UpdateProductViewModel
     {
         public int ID { get; set; }
         [Required]

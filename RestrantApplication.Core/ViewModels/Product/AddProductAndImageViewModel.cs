@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using RestrantApplication.Core.Models.Product;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
