@@ -10,9 +10,12 @@ namespace RestrantApplication.MVC
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
+            builder.Services.AddMemoryCache();
             // Add services to the container.
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews(Options => {
+                Options.Filters.Add<SecurityHeadersFilter>();
+                Options.Filters.Add<RateLimitFilter>();
+                });
 
             builder.Services.infrastractureConfigration(builder.Configuration);
             builder.Services.AddIdentity<ApplicationUser,IdentityRole>()
