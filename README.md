@@ -1,38 +1,53 @@
-🍕 Restaurant Management Web Application
-This is a complete restaurant management web application built using ASP.NET Core MVC and SQL Server. The system allows users to browse the menu, place orders, leave reviews, and manage their carts. Additionally, it provides a powerful backend interface for the Manager role to manage products, categories, orders, and reviews.
+# 🍕 Restaurant Management Web Application
 
-🔧 Technologies Used
-- ASP.NET Core MVC
+A complete restaurant management web application built using **ASP.NET Core 8 MVC** with a clean **N-Tier Architecture**.  
+It offers a seamless experience for customers to browse menus, place orders, leave reviews, and manage their carts.  
+For administrators and staff, it provides a full-featured backend to manage the restaurant’s operations efficiently.
 
-- SQL Server
+---
 
-- Entity Framework Core
+## 🔧 Technologies Used
 
-- Identity for authentication and authorization
+- ASP.NET Core 8 MVC  
+- SQL Server  
+- Entity Framework Core  
+- ASP.NET Identity (authentication & authorization)  
+- AutoMapper  
+- Redis (for caching products, reviews, and cart data)  
+- Cloudinary or local file system (for image uploads)  
 
-- AutoMapper
+---
 
-- Redis for session and cart caching
+## 👥 User Roles
 
-- Cloudinary or local file storage for image management
+- **Client**: Can view products, manage cart, place orders, and write reviews.  
+- **Manager**: Full access to manage products, categories, orders, and monitor feedback.  
+- **Chef & Delivery**: Custom roles to handle different stages of the order lifecycle.
 
-👥 User Roles
-- Client: Can view products, add them to cart, place orders, and add reviews.
+---
 
-- Manager: Can manage products, categories, and monitor orders and user feedback.
+## 📦 Features
 
-- Chef & Delivery roles: Custom roles that interact with the system in different states of the order lifecycle.
+- 🛍️ Product & Category Management  
+- 🛒 Shopping Cart with Redis caching  
+- 🔄 Redis Caching for Products & Reviews  
+- 🔐 Role-Based Access Control (RBAC)  
+- 🧑‍🍳 Order Processing Flow (Manager > Chef > Delivery)  
+- ⭐ Review System  
+- 🧰 Admin Panel for Back-Office Tasks  
+- 🧼 Clean N-Tier Architecture (UI, Services, Repositories, Data)
 
-📦 Features
-- Product and category management
+---
 
-- Shopping cart with caching via Redis
+## 📄 License
 
-- Role-based authorization and authentication
+This project is licensed under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).  
+Feel free to use, modify, and distribute with proper attribution.
 
-- Admin panel for manager functionality
+---
 
-- Review and rating system
+## 👤 Author
 
-- Clean architecture with Services, Repositories, and ViewModels
-
+- **Mario Monsef**  
+- 📧 mariomonsef92@gmail.com  
+- 🔗 [GitHub Profile](https://github.com/MarioMonsef)
